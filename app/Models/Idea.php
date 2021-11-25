@@ -42,4 +42,13 @@ class Idea extends Model
             ],
         ];
     }
+
+    public function isVotedByUser(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->votes()->where('user_id', $user->id)->exists();
+    }
 }
