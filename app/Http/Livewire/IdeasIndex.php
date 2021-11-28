@@ -15,10 +15,12 @@ class IdeasIndex extends Component
 
     public $status = 'All';
     public $category;
+    public $filter;
 
     protected $queryString = [
         'status',
-        'category'
+        'category',
+        'filter',
     ];
 
     protected $listeners = [
@@ -33,6 +35,18 @@ class IdeasIndex extends Component
     public function updatingCategory()
     {
         $this->resetPage();
+    }
+
+    public function updatingFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilter($newFilter)
+    {
+        if ($this->filter === 'My Ideas' && auth()->guest()) {
+            return redirect('login');
+        }
     }
 
     public function queryStringUpdateStatus(string $newStatus)
@@ -54,6 +68,12 @@ class IdeasIndex extends Component
                 )
                 ->when($this->category && $this->category !== 'All Categories', fn ($query) => 
                     $query->where('category_id', $categories->firstWhere('name', $this->category)?->id)
+                )
+                ->when($this->filter && $this->filter === 'Top Voted', fn ($query) => 
+                    $query->orderByDesc('votes_count')
+                )
+                ->when($this->filter && $this->filter === 'My Ideas', fn ($query) => 
+                    $query->where('user_id', auth()->id())
                 )
                 ->addSelect(['voted_by_user' => Vote::select('id')
                     ->where('user_id', auth()->id())
