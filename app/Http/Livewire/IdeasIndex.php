@@ -10,8 +10,6 @@ use Livewire\WithPagination;
 
 class IdeasIndex extends Component
 {
-    use WithPagination;
-
     public function render()
     {
         $statuses = Status::all('id', 'name')->pluck('id', 'name');
