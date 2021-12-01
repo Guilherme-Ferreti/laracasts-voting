@@ -20,4 +20,9 @@ class IdeaPolicy
     {
         return $user->id === (int) $idea->user_id || $user->isAdmin();
     }
+
+    public function markAsNotSpam(User $user)
+    {
+        return $user->isAdmin();
+    }
 }
