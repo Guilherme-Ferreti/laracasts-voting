@@ -25,13 +25,15 @@ class CreateIdea extends Component
 
         $this->validate();
 
-        Idea::create([
+        $idea = Idea::create([
             'user_id' => auth()->id(),
             'category_id' => $this->category_id,
             'status_id' => 1,
             'title' => $this->title,
             'description' => $this->description,
         ]);
+
+        $idea->vote(auth()->user());
 
         session()->flash('success_message', 'Idea was created sucessfully!');
 

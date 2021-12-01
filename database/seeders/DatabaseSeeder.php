@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Status::create(['name' => 'Implemented', 'classes' => 'bg-green text-white']);
         Status::create(['name' => 'Closed', 'classes' => 'bg-red text-white']);
 
-        Idea::factory(100)->create();
+        Idea::factory(100)->existing()->create();
 
         // Generate unique votes. Ensure idea_id and user_id are unique for each row.
 
