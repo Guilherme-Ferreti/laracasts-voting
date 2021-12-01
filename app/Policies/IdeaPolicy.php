@@ -15,4 +15,9 @@ class IdeaPolicy
         return $user->id === (int) $idea->user_id
             && now()->subHour() <= $idea->created_at;
     }
+
+    public function delete(User $user, Idea $idea)
+    {
+        return $user->id === (int) $idea->user_id || $user->isAdmin();
+    }
 }
