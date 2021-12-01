@@ -48,7 +48,8 @@
                         isVisible = false
                     }, 5000)
                 "
-                x-show.transition.duration.1000ms="isVisible"
+                x-show="isVisible"
+                x-transition.duration.1000ms
                 class="text-green mt-4"
             >
                 {{ session('success_message') }}

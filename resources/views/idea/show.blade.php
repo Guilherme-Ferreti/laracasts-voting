@@ -9,7 +9,10 @@
     </div>
 
     <livewire:idea-show :idea="$idea" :votesCount="$votesCount"/>
-    <livewire:edit-idea />
+
+    @can('update', $idea)
+        <livewire:edit-idea :idea="$idea" />
+    @endcan
 
     <div class="comments-container relative space-y-6 md:ml-22 pt-4 my-8 mt-1">
         @foreach (range(1, 3) as $comment)
@@ -48,7 +51,8 @@
                                     <ul
                                         class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl z-10 py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0"
                                         x-cloak
-                                        x-show.transition.origin.top.left="isOpen"
+                                        x-show="isOpen"
+                                        x-transition.origin.top.left
                                         @click.away="isOpen = false"
                                         @keydown.escape.window="isOpen = false"
                                     >
