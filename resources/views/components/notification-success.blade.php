@@ -37,6 +37,10 @@
                 showNotification(message)
             })
 
+            Livewire.on('commentWasAdded',  (message) => {
+                showNotification(message)
+            })
+
         @endif
     "
     x-transition:enter="transition ease-out duration-300"

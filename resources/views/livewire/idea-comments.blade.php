@@ -5,6 +5,7 @@
                 <livewire:idea-comment 
                     :key="$comment->id"
                     :comment="$comment"
+                    :ideaAuthorId="$idea->user_id"
                 />
             @endforeach
         

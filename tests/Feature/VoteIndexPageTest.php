@@ -28,19 +28,10 @@ class VoteIndexPageTest extends TestCase
     /** @test */
     public function ideas_index_livewire_component_correctly_receives_votes_count()
     {
-        $user = User::factory()->create();
-        $userB = User::factory()->create();
-
         $idea = Idea::factory()->create();
 
-        Vote::factory()->create([
+        Vote::factory(2)->create([
             'idea_id' => $idea->id,
-            'user_id' => $user->id,
-        ]);
-
-        Vote::factory()->create([
-            'idea_id' => $idea->id,
-            'user_id' => $userB->id,
         ]);
 
         Livewire::test(IdeasIndex::class)
@@ -52,10 +43,9 @@ class VoteIndexPageTest extends TestCase
     {
         $idea = Idea::factory()->create();
 
-        Livewire::test(IdeaIndex::class, [
-            'idea' => $idea,
-            'votesCount' => 5,
-        ])
+        $idea->votes_count = 5;
+
+        Livewire::test(IdeaIndex::class, ['idea' => $idea])
             ->assertSet('votesCount', 5);
     }
 
@@ -76,10 +66,8 @@ class VoteIndexPageTest extends TestCase
         $idea->votes_count = 1;
         $idea->voted_by_user = 1;
 
-        Livewire::actingAs($user)->test(IdeaIndex::class, [
-            'idea' => $idea,
-            'votesCount' => 5,
-        ])
+        Livewire::actingAs($user)
+            ->test(IdeaIndex::class, ['idea' => $idea])
             ->assertSet('hasVoted', true)
             ->assertSee('Voted');
     }
@@ -88,7 +76,6 @@ class VoteIndexPageTest extends TestCase
     public function user_who_is_logged_in_can_vote_for_idea()
     {
         $user = User::factory()->create();
-
         $idea = Idea::factory()->create();
 
         $this->assertDatabaseMissing('votes', [
@@ -96,10 +83,10 @@ class VoteIndexPageTest extends TestCase
             'idea_id' => $idea->id,
         ]);
 
-        Livewire::actingAs($user)->test(IdeaIndex::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+        $idea->votes_count = 5;
+
+        Livewire::actingAs($user)
+            ->test(IdeaIndex::class, ['idea' => $idea])
             ->call('vote')
             ->assertSet('votesCount', 6)
             ->assertSet('hasVoted', true)
@@ -115,7 +102,6 @@ class VoteIndexPageTest extends TestCase
     public function user_who_is_logged_in_can_remove_vote_for_idea()
     {
         $user = User::factory()->create();
-
         $idea = Idea::factory()->create();
 
         Vote::factory()->create([
@@ -123,13 +109,11 @@ class VoteIndexPageTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $idea->votes_count = 1;
+        $idea->votes_count = 5;
         $idea->voted_by_user = 1;
 
-        Livewire::actingAs($user)->test(IdeaIndex::class, [
-            'idea' => $idea,
-            'votesCount' => 5,
-        ])
+        Livewire::actingAs($user)
+            ->test(IdeaIndex::class, ['idea' => $idea])
             ->call('vote')
             ->assertSet('votesCount', 4)
             ->assertSet('hasVoted', false)

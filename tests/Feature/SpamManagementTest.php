@@ -77,10 +77,7 @@ class SpamManagementTest extends TestCase
         $idea = Idea::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(IdeaShow::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+            ->test(IdeaShow::class, ['idea' => $idea])
             ->assertSee('Mark as Spam');
     }
 
@@ -89,10 +86,7 @@ class SpamManagementTest extends TestCase
     {
         $idea = Idea::factory()->create();
 
-        Livewire::test(IdeaShow::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+        Livewire::test(IdeaShow::class, ['idea' => $idea])
             ->assertDontSee('Mark as Spam');
     }
 
@@ -159,10 +153,7 @@ class SpamManagementTest extends TestCase
         $idea = Idea::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(IdeaShow::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+            ->test(IdeaShow::class, ['idea' => $idea])
             ->assertSee('Not Spam');
     }
 
@@ -173,15 +164,12 @@ class SpamManagementTest extends TestCase
         $idea = Idea::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(IdeaShow::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+            ->test(IdeaShow::class, ['idea' => $idea])
             ->assertDontSee('Not Spam');
     }
 
     /** @test */
-    public function  smap_reports_count_shows_on_idea_index_page_if_logged_in_as_admin()
+    public function spam_reports_count_shows_on_idea_index_page_if_logged_in_as_admin()
     {
         $user = User::factory()->admin()->create();
 
@@ -190,10 +178,7 @@ class SpamManagementTest extends TestCase
         ]);
 
         Livewire::actingAs($user)
-            ->test(IdeaIndex::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+            ->test(IdeaIndex::class, ['idea' => $idea])
             ->assertSee('Spam Reports: 3');
     }
 
@@ -207,10 +192,7 @@ class SpamManagementTest extends TestCase
         ]);
 
         Livewire::actingAs($user)
-            ->test(IdeaShow::class, [
-                'idea' => $idea,
-                'votesCount' => 5,
-            ])
+            ->test(IdeaShow::class, ['idea' => $idea])
             ->assertSee('Spam Reports: 3');
     }
 }

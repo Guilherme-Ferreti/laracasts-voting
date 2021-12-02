@@ -32,8 +32,7 @@
         @forelse ($ideas as $idea)
             <livewire:idea-index
                 :key="$idea->id"
-                :idea="$idea" 
-                :votesCount="$idea->votes_count" 
+                :idea="$idea"
             />
         @empty
             <div class="mx-auto w-70 mt-12">

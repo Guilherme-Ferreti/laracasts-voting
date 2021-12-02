@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Idea::class);
     }
+
+    public function isAuthoredBy(int $user_id)
+    {
+        return $this->user_id == $user_id;
+    }
 }
