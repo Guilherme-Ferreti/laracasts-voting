@@ -9,6 +9,7 @@ use App\Models\Vote;
 use Livewire\Livewire;
 use App\Http\Livewire\IdeaShow;
 use App\Http\Livewire\DeleteIdea;
+use App\Models\Comment;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -57,9 +58,7 @@ class DeleteIdeaTest extends TestCase
             ->call('deleteIdea')
             ->assertRedirect(route('idea.index'));
 
-        $this->assertDatabaseMissing('ideas', [
-            'id' => $idea->id,
-        ]);
+        $this->assertModelMissing($idea);
     }
 
     /** @test */
@@ -72,6 +71,8 @@ class DeleteIdeaTest extends TestCase
             ->test(DeleteIdea::class, ['idea' => $idea])
             ->call('deleteIdea')
             ->assertStatus(Response::HTTP_FORBIDDEN);
+
+        $this->assertModelExists($idea);
     }
 
     /** @test */
@@ -86,9 +87,7 @@ class DeleteIdeaTest extends TestCase
             ->call('deleteIdea')
             ->assertRedirect(route('idea.index'));
 
-        $this->assertDatabaseMissing('ideas', [
-            'id' => $idea->id,
-        ]);
+        $this->assertModelMissing($idea);
     }
 
     /** @test */
@@ -110,11 +109,30 @@ class DeleteIdeaTest extends TestCase
             ->call('deleteIdea')
             ->assertRedirect(route('idea.index'));
 
-        $this->assertDatabaseMissing('ideas', [
-            'id' => $idea->id,
+        $this->assertModelMissing($idea)
+            ->assertDatabaseCount('votes', 0);
+    }
+
+    /** @test */
+    public function deleting_an_idea_with_comments_works_when_user_has_authorization()
+    {
+        $user = User::factory()->create();
+
+        $idea = Idea::factory()->create([
+            'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(0, Vote::count());
+        Comment::factory(5)->create([
+            'idea_id' => $idea->id
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(DeleteIdea::class, ['idea' => $idea])
+            ->call('deleteIdea')
+            ->assertRedirect(route('idea.index'));
+
+        $this->assertModelMissing($idea)
+            ->assertDatabaseCount('comments', 0);
     }
 
     /** @test */
