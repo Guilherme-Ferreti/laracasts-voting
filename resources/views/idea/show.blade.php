@@ -18,7 +18,9 @@
         <livewire:delete-idea :idea="$idea" />
     @endcan
 
-    <livewire:mark-idea-as-spam :idea="$idea" />
+    @auth
+        <livewire:mark-idea-as-spam :idea="$idea" />
+    @endauth
 
     @can('markAsNotSpam', \App\Models\Idea::class)
         <livewire:mark-idea-as-not-spam :idea="$idea" />

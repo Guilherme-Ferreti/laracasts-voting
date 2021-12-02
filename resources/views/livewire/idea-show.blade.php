@@ -29,12 +29,12 @@
                         <div>&bull;</div>
                         <div class="text-gray-900">3 Comments</div>
                     </div>
-                    @auth
-                        <div
-                            class="flex items-center space-x-2 mt-4 md:mt-0"
-                            x-data="{ isOpen: false }"
-                        >
-                            <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
+                    <div
+                        class="flex items-center space-x-2 mt-4 md:mt-0"
+                        x-data="{ isOpen: false }"
+                    >
+                        <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
+                        @auth
                             <div class="relative">
                                 <button
                                     class="relative bg-gray-100 hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in py-2 px-3"
@@ -102,8 +102,8 @@
                                     @endcan
                                 </ul>
                             </div>
-                        </div>
-                    @endauth
+                        @endauth
+                    </div>
 
                     <div class="flex items-center md:hidden mt-4 md:mt-0">
                         <div class="bg-gray-100 text-center rounded-xl h-10 px-4 py-2 pr-8">

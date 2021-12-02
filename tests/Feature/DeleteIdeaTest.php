@@ -11,6 +11,7 @@ use App\Http\Livewire\IdeaShow;
 use App\Http\Livewire\DeleteIdea;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Response;
 
 class DeleteIdeaTest extends TestCase
 {
@@ -59,6 +60,18 @@ class DeleteIdeaTest extends TestCase
         $this->assertDatabaseMissing('ideas', [
             'id' => $idea->id,
         ]);
+    }
+
+    /** @test */
+    public function deleting_an_idea_does_not_work_when_user_does_not_have_authorization()
+    {
+        $user = User::factory()->create();
+        $idea = Idea::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(DeleteIdea::class, ['idea' => $idea])
+            ->call('deleteIdea')
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */

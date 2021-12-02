@@ -45,7 +45,7 @@ class ShowIdeasTest extends TestCase
     }
 
     /** @test */
-    public function sigle_idea_show_correctly_on_the_show_page()
+    public function sigle_idea_shows_correctly_on_the_show_page()
     {
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $statusOpen = Status::factory()->create(['name' => 'OpenUnique']);
