@@ -76,8 +76,8 @@ class OtherFiltersTest extends TestCase
             ->set('filter', 'My Ideas')
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() === 2
-                    && $ideas->first()->title === 'My First Idea'
-                    && $ideas->get(1)->title === 'My Second Idea';
+                    && $ideas->first()->title === 'My Second Idea'
+                    && $ideas->get(1)->title === 'My First Idea';
             });
     }
 
@@ -127,8 +127,8 @@ class OtherFiltersTest extends TestCase
             ->set('filter', 'My Ideas')
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() === 2
-                    && $ideas->first()->title === 'My First Idea'
-                    && $ideas->get(1)->title === 'My Second Idea';
+                    && $ideas->first()->title === 'My Second Idea'
+                    && $ideas->get(1)->title === 'My First Idea';
             });
     }
 
@@ -156,9 +156,9 @@ class OtherFiltersTest extends TestCase
             ->set('filter', 'No Filter')
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() === 3
-                    && $ideas->first()->title === 'My First Idea'
+                    && $ideas->first()->title === 'My Third Idea'
                     && $ideas->get(1)->title === 'My Second Idea'
-                    && $ideas->get(2)->title === 'My Third Idea';
+                    && $ideas->get(2)->title === 'My First Idea';
             });
     }
 

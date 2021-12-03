@@ -8,7 +8,7 @@
                     :ideaAuthorId="$idea->user_id"
                 />
             @endforeach
-        
+
             {{-- <div class="is-admin comment-container relative bg-white rounded-xl flex mt-4">
                 <div class="flex flex-1 px-4 py-6">
                     <div class="flex-none">
@@ -45,6 +45,10 @@
             </div> <!-- end comment-container --> --}}
         
         </div> <!-- end comments-container -->
+
+        <div class="my-8 md:ml-22">
+            {{ $comments->onEachSide(1)->links() }}
+        </div>
     @else
         <div class="mx-auto w-70 mt-12">
             <img src="{{ asset('img/no-ideas.svg') }}" alt="No Ideas" class="mx-auto" style="mix-blend-mode: luminosity">
