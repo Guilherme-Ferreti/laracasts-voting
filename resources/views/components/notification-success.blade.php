@@ -25,19 +25,23 @@
                 showNotification(message)
             })
 
-            Livewire.on('ideaWasMarkedAsSpam',  (message) => {
+            Livewire.on('ideaWasMarkedAsSpam', (message) => {
                 showNotification(message)
             })
 
-            Livewire.on('ideaWasMarkedAsNotSpam',  (message) => {
+            Livewire.on('ideaWasMarkedAsNotSpam', (message) => {
                 showNotification(message)
             })
 
-            Livewire.on('statusWasUpdated',  (message) => {
+            Livewire.on('statusWasUpdated', (message) => {
                 showNotification(message)
             })
 
-            Livewire.on('commentWasAdded',  (message) => {
+            Livewire.on('commentWasAdded', (message) => {
+                showNotification(message)
+            })
+
+            Livewire.on('commentWasUpdated', (message) => {
                 showNotification(message)
             })
 

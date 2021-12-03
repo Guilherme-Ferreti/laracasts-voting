@@ -14,4 +14,8 @@
     @can('markAsNotSpam', \App\Models\Idea::class)
         <livewire:mark-idea-as-not-spam :idea="$idea" />
     @endcan
+
+    @auth
+        <livewire:edit-comment />
+    @endauth
 @endpush
