@@ -49,8 +49,8 @@ class AddCommentsTest extends TestCase
 
         foreach ($invalidComments as $comment) {
             $component->set('comment', $comment)
-            ->call('addComment')
-            ->assertHasErrors(['comment']);
+                ->call('addComment')
+                ->assertHasErrors(['comment']);
         }
     }
 
