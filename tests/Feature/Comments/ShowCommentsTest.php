@@ -81,6 +81,21 @@ class ShowCommentsTest extends TestCase
     }
 
     /** @test */
+    public function op_badge_does_not_show_if_author_of_idea_does_not_comment_on_idea()
+    {
+        $author = User::factory()->create();
+
+        $idea = Idea::factory()->create([
+            'user_id' => $author->id
+        ]);
+
+        Comment::factory(5)->create();
+
+        $this->get(route('idea.show', $idea))
+            ->assertDontSee('OP');
+    }
+
+    /** @test */
     public function comments_pagination_works()
     {
         $idea = Idea::factory()->create();

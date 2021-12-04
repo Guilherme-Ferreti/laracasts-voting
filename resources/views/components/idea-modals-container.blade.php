@@ -17,5 +17,6 @@
 
     @auth
         <livewire:edit-comment />
+        <livewire:delete-comment />
     @endauth
 @endpush

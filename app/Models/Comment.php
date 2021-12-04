@@ -24,7 +24,7 @@ class Comment extends Model
 
     public function isAuthoredBy(int|User $user)
     {
-        $user_id = is_numeric($user) ?: $user->id;
+        $user_id = is_numeric($user) ? $user : $user->id;
 
         return $this->user_id == $user_id;
     }

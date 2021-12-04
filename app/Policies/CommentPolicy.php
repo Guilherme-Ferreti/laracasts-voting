@@ -14,4 +14,9 @@ class CommentPolicy
     {
         return $comment->isAuthoredBy($user);
     }
+
+    public function delete(User $user, Comment $comment)
+    {
+        return $comment->isAuthoredBy($user) || $user->isAdmin();
+    }
 }

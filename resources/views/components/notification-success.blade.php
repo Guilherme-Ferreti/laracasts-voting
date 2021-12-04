@@ -45,6 +45,10 @@
                 showNotification(message)
             })
 
+            Livewire.on('commentWasDelete', (message) => {
+                showNotification(message)
+            })
+
         @endif
     "
     x-transition:enter="transition ease-out duration-300"
