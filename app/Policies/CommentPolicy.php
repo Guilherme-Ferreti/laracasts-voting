@@ -19,4 +19,9 @@ class CommentPolicy
     {
         return $comment->isAuthoredBy($user) || $user->isAdmin();
     }
+
+    public function markAsNotSpam(User $user)
+    {
+        return $user->isAdmin();
+    }
 }

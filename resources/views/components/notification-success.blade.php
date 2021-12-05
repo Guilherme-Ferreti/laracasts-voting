@@ -48,7 +48,14 @@
             Livewire.on('commentWasDelete', (message) => {
                 showNotification(message)
             })
+            
+            Livewire.on('commentWasMarkedAsSpam', (message) => {
+                showNotification(message)
+            })
 
+            Livewire.on('commentWasMarkedAsNotSpam', (message) => {
+                showNotification(message)
+            })
         @endif
     "
     x-transition:enter="transition ease-out duration-300"
