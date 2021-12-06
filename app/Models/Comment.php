@@ -22,6 +22,11 @@ class Comment extends Model
         return $this->belongsTo(Idea::class);
     }
 
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
     public function isAuthoredBy(int|User $user)
     {
         $user_id = is_numeric($user) ? $user : $user->id;

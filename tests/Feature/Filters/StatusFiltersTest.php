@@ -52,8 +52,8 @@ class StatusFiltersTest extends TestCase
     {
         Status::factory(5)->create();
 
-        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
-        $statusInProgress = Status::factory()->create(['name' => 'In Progress', 'classes' => 'bg-yellow text-white']);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering']);
+        $statusInProgress = Status::factory()->create(['name' => 'In Progress']);
 
         Idea::factory(2)->create(['status_id' => $statusConsidering->id]);
         Idea::factory(3)->create(['status_id' => $statusInProgress->id]);

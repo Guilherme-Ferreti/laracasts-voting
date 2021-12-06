@@ -24,7 +24,7 @@ class IdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         
-        $statusOpen = Status::create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::create(['name' => 'Open']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
@@ -51,7 +51,7 @@ class IdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         
-        $statusOpen = Status::create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::create(['name' => 'Open']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
@@ -73,7 +73,7 @@ class IdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         
-        $statusOpen = Status::create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::create(['name' => 'Open']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
@@ -100,7 +100,7 @@ class IdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         
-        $statusOpen = Status::create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::create(['name' => 'Open']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
@@ -122,7 +122,7 @@ class IdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         
-        $statusOpen = Status::create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::create(['name' => 'Open']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
