@@ -11,6 +11,7 @@ class SetStatus extends Component
 {
     public $idea;
     public $status;
+    public $comment;
     public $notifyAllVoters;
 
     public function mount(Idea $idea)
@@ -29,6 +30,15 @@ class SetStatus extends Component
         if ($this->notifyAllVoters) {
             NotifyAllVoters::dispatch($this->idea);
         }
+
+        $this->idea->comments()->create([
+            'body' => $this->comment ?? 'No comment was added.',
+            'user_id' => auth()->id(),
+            'status_id' => $this->status,
+            'is_status_update' => true,
+        ]);
+
+        $this->reset('comment');
 
         $this->emit('statusWasUpdated', 'Idea status updated successfully!');
     }

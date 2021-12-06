@@ -12,7 +12,7 @@
         </div>
         <div class="w-full md:mx-4">
             @if ($comment->is_status_update)
-                <h4 class="text-xl font-semibold mb-3">
+                <h4 class="text-xl text-gray-900 font-semibold mb-3">
                     Status Changed to "{{ $comment->status->name }}"
                 </h4>
             @endif
@@ -40,7 +40,7 @@
                 </div>
                 @auth
                 <div
-                    class="flex items-center space-x-2"
+                    class="flex text-gray-900 items-center space-x-2"
                     x-data="{ isOpen: false }"
                 >
                     <div class="relative">
