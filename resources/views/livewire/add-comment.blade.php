@@ -39,6 +39,16 @@
                     }, 5000)
                 }
             })
+
+            @if (session('scrollToComment'))
+                console.log('{{ session('scrollToComment') }}')
+                const commentToScrollTo = document.querySelector('#comment-{{ session('scrollToComment') }}')
+                commentToScrollTo.scrollIntoView({ behavior: 'smooth'})
+                commentToScrollTo.classList.add('bg-green-50')
+                setTimeout(() => {
+                    commentToScrollTo.classList.remove('bg-green-50')
+                }, 5000)
+            @endif
         "
         x-transition.origin.top.left
         @click.away="isOpen = false"
