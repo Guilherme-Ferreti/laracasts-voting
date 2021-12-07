@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
 use App\Models\Idea;
-use Illuminate\Http\Response;
 use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Http\Response;
+use App\Http\Livewire\Traits\WithAuthRedirects;
 
 class CreateIdea extends Component
 {
+    use WithAuthRedirects;
+    
     public $title;
     public $category_id = 1;
     public $description;
