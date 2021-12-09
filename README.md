@@ -32,11 +32,11 @@ Configure your database connection and use the following command to create table
 
 ```php artisan migrate:fresh --seed```
 
-Then, serve the application using PHP's development server.
-
 Finally, generate the encryption key:
 
 ```php artisan key:generate```
+
+And serve the application using PHP's development server.
 
 ```php artisan serve```
 
