@@ -37,7 +37,12 @@
                         <div class="rounded-full border bg-gray-100 px-3 py-1" title="Original Poster">OP</div>
                         <div>&bull;</div>
                     @endif
-                    <div>{{ $comment->created_at->diffForHumans() }}</div>
+                    <div>
+                        {{ $comment->created_at->diffForHumans() }} 
+                        @if ($comment->created_at != $comment->updated_at)
+                            <small>(edited)</small>
+                        @endif
+                    </div> 
                 </div>
                 @auth
                 <div

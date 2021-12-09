@@ -115,4 +115,21 @@ class ShowCommentsTest extends TestCase
             ->assertDontSee($firstComment->body)
             ->assertSee($lastComment->body);
     }
+
+    /** @test */
+    public function edited_indicator_shows_if_comment_was_edited()
+    {
+        $commentOne = Comment::factory()->create();
+
+        $commentTwo = Comment::factory()->create();
+
+        $commentTwo->body = 'My edited comment';
+        $commentTwo->save();
+
+        $this->get(route('idea.show', $commentOne->idea))
+            ->assertDontSee('(edited)');
+
+        $this->get(route('idea.show', $commentTwo->idea))
+            ->assertDontSee('(edited)');
+    }
 }
