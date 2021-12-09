@@ -25,7 +25,7 @@
                     @endif
                 @endadmin
                 <div>
-                    {{ $comment->body }}
+                    {!! nl2br(e($comment->body)) !!}
                 </div>
             </div>
 

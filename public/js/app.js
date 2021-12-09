@@ -1870,8 +1870,7 @@ var directiveOrder = [
   "show",
   "if",
   DEFAULT,
-  "portal",
-  "portal-target",
+  "teleport",
   "element"
 ];
 function byPriority(a, b) {
@@ -1976,8 +1975,8 @@ function findClosest(el, callback) {
     return;
   if (callback(el))
     return el;
-  if (el._x_portal_back)
-    el = el._x_portal_back;
+  if (el._x_teleportBack)
+    el = el._x_teleportBack;
   if (!el.parentElement)
     return;
   return findClosest(el.parentElement, callback);
@@ -2492,7 +2491,7 @@ var Alpine = {
   get raw() {
     return raw;
   },
-  version: "3.6.1",
+  version: "3.7.0",
   flushAndStopDeferringMutations,
   disableEffectScheduling,
   setReactivityEngine,
@@ -2623,6 +2622,29 @@ var AlpineId = class {
 
 // packages/alpinejs/src/magics/$el.js
 magic("el", (el) => el);
+
+// packages/alpinejs/src/directives/x-teleport.js
+directive("teleport", (el, {expression}, {cleanup}) => {
+  let target = document.querySelector(expression);
+  let clone2 = el.content.cloneNode(true).firstElementChild;
+  el._x_teleport = clone2;
+  clone2._x_teleportBack = el;
+  if (el._x_forwardEvents) {
+    el._x_forwardEvents.forEach((eventName) => {
+      clone2.addEventListener(eventName, (e) => {
+        e.stopPropagation();
+        el.dispatchEvent(new e.constructor(e.type, e));
+      });
+    });
+  }
+  addScopeToNode(clone2, {}, el);
+  mutateDom(() => {
+    target.appendChild(clone2);
+    initTree(clone2);
+    clone2._x_ignore = true;
+  });
+  cleanup(() => clone2.remove());
+});
 
 // packages/alpinejs/src/directives/x-ignore.js
 var handler = () => {
