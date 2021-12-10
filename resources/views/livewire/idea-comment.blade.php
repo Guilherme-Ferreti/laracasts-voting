@@ -38,8 +38,9 @@
                         <div>&bull;</div>
                     @endif
                     <div>
-                        {{ $comment->created_at->diffForHumans() }} 
-                        @if ($comment->created_at != $comment->updated_at)
+                        {{ $comment->created_at->diffForHumans() }}
+
+                        @if ($comment->bodyWasEdited())
                             <small>(edited)</small>
                         @endif
                     </div> 

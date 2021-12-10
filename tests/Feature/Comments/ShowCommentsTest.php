@@ -117,11 +117,14 @@ class ShowCommentsTest extends TestCase
     }
 
     /** @test */
-    public function edited_indicator_shows_if_comment_was_edited()
+    public function edited_indicator_shows_only_if_comment_body_was_edited()
     {
         $commentOne = Comment::factory()->create();
 
         $commentTwo = Comment::factory()->create();
+
+        $commentOne->spam_reports++;
+        $commentOne->save();
 
         $commentTwo->body = 'My edited comment';
         $commentTwo->save();
