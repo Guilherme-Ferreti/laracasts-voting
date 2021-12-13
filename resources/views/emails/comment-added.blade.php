@@ -1,16 +1,16 @@
 @component('mail::message')
-# A comment was posted on your idea
+# {{ __('A comment was posted on your idea') }}
 
-{{ $comment->user->name }} commented on your idea:
+{{ $comment->user->name }} {{ __('commented on your idea') }}:
 
 **{{ $comment->idea->title }}**
 
-Comment: {{ $comment->body }}
+{{ __('Comment') }}: {{ $comment->body }}
 
 @component('mail::button', ['url' => route('idea.show', $comment->idea)])
-Go to Idea
+{{ __('Go to Idea') }}
 @endcomponent
 
-Thanks,<br>
+{{ __('Thanks') }},<br>
 {{ config('app.name') }}
 @endcomponent

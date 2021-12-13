@@ -16,7 +16,7 @@ class VoteFactory extends Factory
     public function definition()
     {
         return [
-            'idea_id' =>Idea::factory(),
+            'idea_id' => Idea::factory(),
             'user_id' => User::factory(),
         ];
     }

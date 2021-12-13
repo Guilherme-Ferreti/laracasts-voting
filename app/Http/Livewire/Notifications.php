@@ -72,7 +72,7 @@ class Notifications extends Component
         $idea = Idea::find($notification->data['idea_id']);
 
         if (! $idea) {
-            session()->flash('error_message', 'This idea no longer exists!');
+            session()->flash('error_message', __('This idea no longer exists!'));
 
             return redirect()->route('idea.index');
         }
@@ -80,7 +80,7 @@ class Notifications extends Component
         $comment = Comment::find($notification->data['comment_id']);
 
         if (! $comment) {
-            session()->flash('error_message', 'This comment no longer exists!');
+            session()->flash('error_message', __('This comment no longer exists!'));
 
             return redirect()->route('idea.index');
         }

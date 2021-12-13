@@ -28,7 +28,7 @@ class MarkCommentAsNotSpam extends Component
         $this->comment->spam_reports = 0;
         $this->comment->save();
 
-        $this->emit('commentWasMarkedAsNotSpam', 'Spam counter was reset!');
+        $this->emit('commentWasMarkedAsNotSpam', __('Spam counter was reset!'));
     }
     
     public function render()

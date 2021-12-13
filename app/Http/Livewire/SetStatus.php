@@ -25,7 +25,7 @@ class SetStatus extends Component
         abort_if(auth()->guest() || ! auth()->user()->isAdmin(), Response::HTTP_FORBIDDEN);
 
         if ($this->idea->status_id == $this->status) {
-            $this->emit('statusWasUpdatedError', 'Status is the same!');
+            $this->emit('statusWasUpdatedError', __('Status is the same!'));
             return;
         }
 
@@ -37,7 +37,7 @@ class SetStatus extends Component
         }
 
         $this->idea->comments()->create([
-            'body' => $this->comment ?? 'No comment was added.',
+            'body' => $this->comment ?? __('No comment was added.'),
             'user_id' => auth()->id(),
             'status_id' => $this->status,
             'is_status_update' => true,
@@ -45,7 +45,7 @@ class SetStatus extends Component
 
         $this->reset('comment');
 
-        $this->emit('statusWasUpdated', 'Idea status updated successfully!');
+        $this->emit('statusWasUpdated', __('Idea status updated successfully!'));
     }
 
     public function render()

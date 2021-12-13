@@ -39,7 +39,7 @@ class AddComment extends Component
         
         $this->reset('comment');
 
-        $this->emit('commentWasAdded', 'Comment was posted!');
+        $this->emit('commentWasAdded', __('Comment was posted!'));
     }
     
     public function render()

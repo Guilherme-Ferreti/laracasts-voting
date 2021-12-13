@@ -8,20 +8,20 @@
                 <img src="{{ $comment->user->getAvatar() }}" alt="avatar" class="w-14 h-14 rounded-xl">
             </a>
             @if ($comment->user->isAdmin())
-                <div class="text-center uppercase text-blue text-xxs font-bold mt-1">Admin</div>
+                <div class="text-center uppercase text-blue text-xxs font-bold mt-1">{{ __('Admin') }}</div>
             @endif
         </div>
         <div class="w-full md:mx-4">
             @if ($comment->is_status_update)
                 <h4 class="text-xl text-gray-900 font-semibold mb-3">
-                    Status Changed to "{{ $comment->status->name }}"
+                    {{ __('Status Changed to') }} "{{ $comment->status->getTranslatedName() }}"
                 </h4>
             @endif
 
             <div class="text-gray-600">
                 @admin
                     @if ($comment->spam_reports > 0)
-                        <div class="text-red mb-2">Spam Reports: {{ $comment->spam_reports }}</div>
+                        <div class="text-red mb-2">{{ __('Spam Reports') }}: {{ $comment->spam_reports }}</div>
                     @endif
                 @endadmin
                 <div>
@@ -34,14 +34,14 @@
                     <div class="@if ($comment->is_status_update) text-blue @endif font-bold text-gray-900">{{ $comment->user->name }}</div>
                     <div>&bull;</div>
                     @if ($comment->isAuthoredBy($ideaAuthorId))
-                        <div class="rounded-full border bg-gray-100 px-3 py-1" title="Original Poster">OP</div>
+                        <div class="rounded-full border bg-gray-100 px-3 py-1" title="{{ __('Original Poster') }}">{{ __('OP') }}</div>
                         <div>&bull;</div>
                     @endif
                     <div>
                         {{ $comment->created_at->diffForHumans() }}
 
                         @if ($comment->bodyWasEdited())
-                            <small>(edited)</small>
+                            <small>({{ __('edited') }})</small>
                         @endif
                     </div> 
                 </div>
@@ -74,7 +74,7 @@
                                         Livewire.emit('setEditComment', {{ $comment->id }})
                                     "
                                     class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                        Edit Comment
+                                        {{ __('Edit Comment') }}
                                     </a>
                                 </li>
                             @endcan
@@ -87,7 +87,7 @@
                                         Livewire.emit('setDeleteComment', {{ $comment->id }})
                                     "
                                     class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                        Delete Comment
+                                        {{ __('Delete Comment') }}
                                     </a>
                                 </li>
                             @endcan
@@ -99,7 +99,7 @@
                                     Livewire.emit('setMarkAsSpamComment', {{ $comment->id }})
                                 "
                                 class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                    Mark as Spam
+                                    {{ __('Mark as Spam') }}
                                 </a>
                             </li>
                             @can('markAsNotSpam', \App\Models\Comment::class)
@@ -111,7 +111,7 @@
                                             Livewire.emit('setMarkAsNotSpamComment', {{ $comment->id }})
                                         "
                                         class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                        Not Spam
+                                        {{ __('Not Spam') }}
                                     </a>
                                 </li>
                             @endcan

@@ -31,7 +31,7 @@ class CreateIdeaTest extends TestCase
             ->get(route('idea.index'))
             ->assertSuccessful()
             ->assertDontSee('Please login to create an idea.')
-            ->assertSee('Let us know what you would like and we\'ll take a look over!', false);
+            ->assertSee('Let us know what you would like', false);
     }
 
     /** @test */

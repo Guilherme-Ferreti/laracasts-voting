@@ -28,7 +28,7 @@ class MarkCommentAsSpam extends Component
         $this->comment->spam_reports++;
         $this->comment->save();
 
-        $this->emit('commentWasMarkedAsSpam', 'Comment was marked as spam!');
+        $this->emit('commentWasMarkedAsSpam', __('Comment was marked as spam!'));
     }
 
     public function render()

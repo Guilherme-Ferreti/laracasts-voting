@@ -44,4 +44,19 @@ class StatusTest extends TestCase
         $this->assertEquals(4, Status::getCount()['implemented']);
         $this->assertEquals(5, Status::getCount()['closed']);
     }
+
+    /** @test */
+    public function status_name_is_return_if_status_name_cannot_be_translated()
+    {
+        $statusOpen = Status::factory()->create(['name' => 'Open']);
+
+        app()->setLocale('en');
+
+        $this->assertEquals('Open', $statusOpen->getTranslatedName());
+
+        app()->setLocale('pt_BR');
+
+        $this->assertEquals('Aberta', $statusOpen->getTranslatedName());
+
+    }
 }

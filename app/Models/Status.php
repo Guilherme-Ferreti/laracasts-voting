@@ -45,4 +45,17 @@ class Status extends Model
             ->first()
             ->toArray();
     }
+
+    public function getTranslatedName(): string
+    {
+        $translationKey = 'messages.ideas.' . $this->name;
+
+        $translatedString = __($translationKey);
+
+        if ($translatedString === $translationKey) {
+            return $this->name;
+        }
+            
+        return $translatedString;
+    }
 }

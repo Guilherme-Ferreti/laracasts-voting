@@ -14,7 +14,13 @@
     <div class="hidden md:block border-r border-gray-100 px-5 py-8">
         <div class="text-center">
             <div class="font-semibold text-2xl @if ($hasVoted) text-blue @endif">{{ $votesCount }}</div>
-            <div class="text-gray-500">Votes</div>
+            <div class="text-gray-500">
+                @if ($votesCount == 1)
+                    {{ __('Vote') }}  
+                @else
+                    {{ __('Votes') }}
+                @endif
+            </div>
         </div>
 
         <div class="mt-8">
@@ -23,14 +29,14 @@
                     wire:click.prevent="vote"
                     class="w-20 text-white bg-blue border border-blue hover:bg-blue-hover font-bold text-xxs uppercase rounded-xl transition duration-150 ease-in px-4 py-3"
                 >
-                    Voted
+                    {{ __('Voted') }}
                 </button>
             @else
                 <button 
                     wire:click.prevent="vote"
                     class="w-20 bg-gray-200 border border-gray-200 hover:border-gray-400 font-bold text-xxs uppercase rounded-xl transition duration-150 ease-in px-4 py-3"
                 >
-                    Vote
+                    {{ __('messages.ideas.vote-button') }}
                 </button>
             @endif
         </div>
@@ -48,7 +54,7 @@
             <div class="text-gray-600 mt-3 line-clamp-3">
                 @admin
                     @if ($idea->spam_reports > 0)
-                        <div class="text-red mb-2">Spam Reports: {{ $idea->spam_reports }}</div>
+                        <div class="text-red mb-2">{{ __('Spam Reports') }}: {{ $idea->spam_reports }}</div>
                     @endif
                 @endadmin
                 {{ $idea->description }}
@@ -60,33 +66,41 @@
                     <div>&bull;</div>
                     <div>{{ $idea->category->name }}</div>
                     <div>&bull;</div>
-                <div wire:ignore class="text-gray-900">{{ $idea->comments_count }} Comments</div>
+                    <div wire:ignore class="text-gray-900">
+                        {{ $idea->comments_count }} @if ($idea->comments_count == 1) {{ __('Comment') }} @else{{ __('Comments') }} @endif
+                    </div>
                 </div>
                 <div
                     x-data="{ isOpen: false }"
                     class="flex items-center space-x-2 mt-4 md:mt-0"
                 >
-                    <div class="{{'status-' . Str::kebab($idea->status->name) }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
+                    <div class="{{'status-' . Str::kebab($idea->status->name) }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->getTranslatedName() }}</div>
                 </div>
 
                 <div class="flex items-center md:hidden mt-4 md:mt-0">
                     <div class="bg-gray-100 text-center rounded-xl h-10 px-4 py-2 pr-8">
                         <div class="text-sm font-bold leading-none @if ($hasVoted) text-blue @endif">{{ $votesCount }}</div>
-                        <div class="text-xxs font-semibold leading-none text-gray-400">Votes</div>
+                        <div class="text-xxs font-semibold leading-none text-gray-400">
+                            @if ($votesCount == 1)
+                                {{ __('Vote') }}  
+                            @else
+                                {{ __('Votes') }}
+                            @endif
+                        </div>
                     </div>
                     @if ($hasVoted)
                         <button
                             wire:click.prevent="vote"
                             class="w-20 bg-blue border border-blue font-bold text-xxs text-white uppercase rounded-xl hover:bg-blue-hover transition duration-150 ease-in px-4 py-3 -mx-5"
                         >
-                            Voted
+                            {{ __('Voted') }}
                         </button>
                     @else
                         <button
                             wire:click.prevent="vote"
                             class="w-20 bg-gray-200 border border-gray-200 font-bold text-xxs uppercase rounded-xl hover:border-gray-400 transition duration-150 ease-in px-4 py-3 -mx-5"
                         >
-                            Vote
+                            {{ __('messages.ideas.vote-button') }}
                         </button>
                     @endif
                 </div>

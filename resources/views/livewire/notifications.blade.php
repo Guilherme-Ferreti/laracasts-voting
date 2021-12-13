@@ -36,7 +36,7 @@
                         <img src="{{ $notification->data['user_avatar'] }}" class="rounded-xl w-10 h-10" alt="avatar">
                         <div class="ml-4">
                             <div class="line-clamp-6">
-                                <span class="font-semibold">{{ $notification->data['user_name'] }}</span> commented on
+                                <span class="font-semibold">{{ $notification->data['user_name'] }}</span> {{ __('commented on') }}
                                 <span class="font-semibold">{{ $notification->data['idea_title'] }}</span>:
                                 <span>"{{ $notification->data['comment_body'] }}"</span>
                             </div>
@@ -52,7 +52,7 @@
                     @click="isOpen = false"
                     class="w-full block font-semibold hover:bg-gray-100 transition duration-150 ease-in px-5 py-4"
                 >
-                    Mark all as read
+                    {{ __('Mark all as read') }}
                 </button>
             </li>
         @elseif ($isLoading) 
@@ -70,7 +70,7 @@
             <div class="mx-auto w-40 py-6">
                 <img src="{{ asset('img/no-ideas.svg') }}" alt="No Ideas" class="mx-auto mix-blend-luminosity">
                 <div class="text-gray-400 text-center font-bold mt-6">
-                    No new notifications...
+                    {{ __('No new notifications...') }}
                 </div>
             </div>
         @endif

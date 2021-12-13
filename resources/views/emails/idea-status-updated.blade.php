@@ -1,16 +1,16 @@
 @component('mail::message')
-# Idea Status Update
+# {{ __('Idea Status Update') }}
 
-The idea: {{ $idea->title }}
+{{ __('The idea') }}: {{ $idea->title }}
 
-has been updated to a status of:
+{{ __('has been updated to a status of') }}:
 
-{{ $idea->status->name }}
+{{ __('messages.ideas.' . $idea->status->name) }}
 
 @component('mail::button', ['url' => route('idea.show', $idea)])
-View Idea
+{{ __('View Idea') }}
 @endcomponent
 
-Thanks,<br>
+{{ __('Thanks') }},<br>
 {{ config('app.name') }}
 @endcomponent

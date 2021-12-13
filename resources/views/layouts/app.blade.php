@@ -40,22 +40,23 @@
                                 </form>
                                 <livewire:notifications />
                             </div>
-                            
                         @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('Log in') }}</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('Register') }}</a>
                             @endif
                         @endauth
                     </div>
                 @endif
 
                 @auth
-                    <a href="#">
+                    <a href="#" class="pr-4">
                         <img src="{{ auth()->user()->getAvatar() }}" alt="avatar" class="w-10 h-10 rounded-full">
                     </a>
                 @endauth
+
+                <livewire:locale-selector />
             </div>
         </header>
 
@@ -72,12 +73,12 @@
                     "
                 >
                     <div class="text-center px-6 py-2 pt-6">
-                        <h3 class="font-semibold text-base">Add an idea</h3>
+                        <h3 class="font-semibold text-base">{{ __('Add an idea') }}</h3>
                         <p class="text-xs mt-4">
                             @auth
-                                Let us know what you would like and we'll take a look over!
+                                {{ __('Let us know what you would like and we\'ll take a look over!') }}
                             @else
-                                Please login to create an idea.
+                                {{ __('Please login to create an idea.') }}
                             @endauth
                         </p>
                     </div>
