@@ -6,7 +6,7 @@ This project was created along with the course [Build a Voting App](https://lara
 You can see it live [here](https://laracasts-voting.herokuapp.com/).
 
 ### Features added by myself
-• Portuguease translation (Coming soon).
+• Portuguese translation.
 
 ### Requirements
 
